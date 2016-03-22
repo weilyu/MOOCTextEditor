@@ -43,7 +43,7 @@ public class BasicDocument extends Document {
     @Override
     public int getNumSentences() {
         // if you need help.
-            List<String> token = getTokens("[^.!?]+");
+        List<String> token = getTokens("[^.!?]+");
         return token.size();
     }
 
