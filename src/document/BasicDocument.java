@@ -63,7 +63,6 @@ public class BasicDocument extends Document {
     public int getNumSyllables() {
         // if you need help.
         List<String> tokens = getTokens("[a-zA-Z]+");
-        System.out.println(tokens);
         int totalSyllables = 0;
         for (String word : tokens) {
             totalSyllables += countSyllables(word);
