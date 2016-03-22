@@ -138,7 +138,11 @@ public abstract class Document {
      */
     public double getFleschScore() {
         // TODO: Implement this method
-        return 0.0;
+        double nword = (double) getNumWords();
+        double nsentence = (double) getNumSentences();
+        double nsyl = (double) getNumSyllables();
+        double score = 206.835 - 1.015 * (nword / nsentence) - 84.6 * (nsyl / nword);
+        return score;
     }
 
 
