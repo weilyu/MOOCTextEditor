@@ -137,7 +137,6 @@ public abstract class Document {
      * return the Flesch readability score of this document
      */
     public double getFleschScore() {
-        // TODO: Implement this method
         double nword = (double) getNumWords();
         double nsentence = (double) getNumSentences();
         double nsyl = (double) getNumSyllables();
