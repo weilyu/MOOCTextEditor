@@ -55,9 +55,9 @@ public abstract class Document {
     protected int countSyllables(String word) {
         // getNumSyllables method in BasicDocument (module 1) and
         // EfficientDocument (module 2).
-        word = word.toLowerCase();
+        String word1 = word.toLowerCase();
         String pattern = "[^aeiouy]+";
-        String[] wordSplit = word.split(pattern);
+        String[] wordSplit = word1.split(pattern);
 
         int actualLength = 0;
         for (String w : wordSplit) {
@@ -65,7 +65,7 @@ public abstract class Document {
         }
 
 
-        if (wordSplit[wordSplit.length - 1].equals("e") && word.charAt(word.length() - 1)
+        if (wordSplit[wordSplit.length - 1].equals("e") && word1.charAt(word1.length() - 1)
                 == 'e' && actualLength > 1) return actualLength - 1;
         return actualLength;
     }
