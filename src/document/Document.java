@@ -35,7 +35,7 @@ public abstract class Document {
      * pattern
      */
     protected List<String> getTokens(String pattern) {
-        ArrayList<String> tokens = new ArrayList<String>();
+        ArrayList<String> tokens = new ArrayList<>();
         Pattern tokSplitter = Pattern.compile(pattern);
         Matcher m = tokSplitter.matcher(text);
 
@@ -141,8 +141,7 @@ public abstract class Document {
         double nword = (double) getNumWords();
         double nsentence = (double) getNumSentences();
         double nsyl = (double) getNumSyllables();
-        double score = 206.835 - 1.015 * (nword / nsentence) - 84.6 * (nsyl / nword);
-        return score;
+        return 206.835 - 1.015 * (nword / nsentence) - 84.6 * (nsyl / nword);
     }
 
 
