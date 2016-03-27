@@ -30,7 +30,7 @@ public class EfficientDocument extends Document {
     private boolean isWord(String tok) {
         // Note: This is a fast way of checking whether a string is a word
         // You probably don't want to change it.
-        return !(tok.indexOf("!") >= 0 || tok.indexOf(".") >= 0 || tok.indexOf("?") >= 0);
+        return !(tok.contains("!") || tok.contains(".") || tok.contains("?"));
     }
 
 
@@ -44,8 +44,27 @@ public class EfficientDocument extends Document {
         // Words are only strings of letters.  No numbers.
         List<String> tokens = getTokens("[!?.]+|[a-zA-Z]+");
 
-        // TODO: Finish this method.  Remember the countSyllables method from
         // Document.  That will come in handy here.
+        numWords = 0;
+        numSentences = 0;
+        numSyllables = 0;
+
+        for (String tk : tokens) {
+            if (isWord(tk)) {
+                numWords++;
+                numSyllables += countSyllables(tk);
+            } else {
+                numSentences++;
+            }
+        }
+
+        //if the last token is word, numSentence should add 1
+        int lastIdx = 0;
+        if (tokens.size() == 0) return;
+        if (tokens.size() > 1) lastIdx = tokens.size() - 1;
+        if (isWord(tokens.get(lastIdx))) {
+            numSentences++;
+        }
     }
 
 
@@ -58,8 +77,7 @@ public class EfficientDocument extends Document {
      */
     @Override
     public int getNumWords() {
-        //TODO: write this method.  Hint: It's simple
-        return 0;
+        return numWords;
     }
 
     /**
@@ -72,8 +90,7 @@ public class EfficientDocument extends Document {
      */
     @Override
     public int getNumSentences() {
-        //TODO: write this method.  Hint: It's simple
-        return 0;
+        return numSentences;
     }
 
     /**
@@ -87,8 +104,7 @@ public class EfficientDocument extends Document {
      */
     @Override
     public int getNumSyllables() {
-        //TODO: write this method.  Hint: It's simple
-        return 0;
+        return numSyllables;
     }
 
     // Can be used for testing
