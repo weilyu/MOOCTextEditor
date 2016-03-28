@@ -2,4 +2,23 @@
 - hiding irrelevant details to focus on the essential feature needed to understand and use a thing
 - LinkedList
     - combined with nodes
-    - each node have info of prev and next nodes
+    - each node has prev and next pointers
+    - first node contain head, last node contain tail
+    - singly linked list only have next pointer
+    - ListNode
+    - sentinel nodes
+    - dummy nodes don't store anything
+    - generic <E>
+- testing practice
+    - standard cycle
+        - write code
+        - write tests
+        - test code
+    - test-driven development
+        - write tests
+        - write code
+        - test code
+    - black box testing: only tests through the interface
+    - clear box testing: test which know about the implementation
+    - unit testing
+        - JUnit
