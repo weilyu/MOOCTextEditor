@@ -42,7 +42,10 @@ public class MyLinkedList<E> extends AbstractList<E> {
      */
     public E get(int index) {
         // TODO: Implement this method.
-        return null;
+        if (index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        return getNode(index).data;
     }
 
     /**
@@ -88,6 +91,14 @@ public class MyLinkedList<E> extends AbstractList<E> {
     public E set(int index, E element) {
         // TODO: Implement this method
         return null;
+    }
+
+    private LLNode<E> getNode(int index) {
+        LLNode<E> ans = head;
+        for (int i = 0; i < index + 1; i++) {
+            ans = ans.next;
+        }
+        return ans;
     }
 }
 
