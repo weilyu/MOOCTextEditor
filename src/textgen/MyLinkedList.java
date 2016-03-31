@@ -18,7 +18,11 @@ public class MyLinkedList<E> extends AbstractList<E> {
      * Create a new empty LinkedList
      */
     public MyLinkedList() {
-        // TODO: Implement this method
+        size = 0;
+        head = new LLNode<>(null);
+        tail = new LLNode<>(null);
+        head.next = tail;
+        tail.prev = head;
     }
 
     /**
@@ -43,8 +47,9 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
     /**
      * Add an element to the list at the specified index
+     * <p>
+     * The index where the element should be added
      *
-     *  The index where the element should be added
      * @param element The element to add
      */
     public void add(int index, E element) {
