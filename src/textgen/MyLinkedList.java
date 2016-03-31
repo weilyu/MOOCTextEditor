@@ -58,7 +58,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
      * @param element The element to add
      */
     public void add(int index, E element) {
-        if (index >= size || index < 0) throw new IndexOutOfBoundsException();
+        if (index > size || index < 0) throw new IndexOutOfBoundsException();
 
         if (element == null) throw new NullPointerException();
 
