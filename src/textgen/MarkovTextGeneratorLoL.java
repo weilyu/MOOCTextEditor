@@ -72,11 +72,11 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
      */
     @Override
     public String generateText(int numWords) {
+        if (wordList.size() == 0 || numWords == 0) return "";
         String currWord = wordList.get(0).getWord();
         StringBuilder output = new StringBuilder(currWord);
         output.append(" ");
-        int countSize = 1;
-        while (countSize < numWords) {
+        for (int i = 0; i < numWords - 1; i++) {
             String next;
             //find the random next word in wordList
             for (ListNode ln : wordList) {
@@ -84,8 +84,8 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
                     next = ln.getRandomNextWord(rnGenerator);
                     output.append(next);
                     output.append(" ");
-                    countSize++;
                     currWord = next;
+                    break;
                 }
             }
         }
