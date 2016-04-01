@@ -2,7 +2,6 @@ package textgen;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 
 /**
@@ -22,7 +21,7 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
     private Random rnGenerator;
 
     public MarkovTextGeneratorLoL(Random generator) {
-        wordList = new LinkedList<ListNode>();
+        wordList = new LinkedList<>();
         starter = "";
         rnGenerator = generator;
     }
@@ -174,7 +173,7 @@ class ListNode {
 
     ListNode(String word) {
         this.word = word;
-        nextWords = new LinkedList<String>();
+        nextWords = new LinkedList<>();
     }
 
     public String getWord() {
