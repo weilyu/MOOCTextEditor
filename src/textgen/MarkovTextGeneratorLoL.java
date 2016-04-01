@@ -36,9 +36,17 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
         String[] source = sourceText.split("\\s+");
 
         //loop all the words from position 0 to position length - 2
-        for (int i = 0; i < source.length - 1; i++) {
+        for (int i = 0; i < source.length; i++) {
             String current = source[i];
-            String next = source[i + 1];
+
+            //if the word is last word in sourceText, set next to the first word
+            String next;
+            if (i == source.length - 1) {
+                next = source[0];
+            } else {
+                next = source[i + 1];
+            }
+
             boolean findWord = false;
 
             //if find the word in wordList
@@ -64,8 +72,24 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
      */
     @Override
     public String generateText(int numWords) {
-        // TODO: Implement this method
-        return null;
+        String currWord = wordList.get(0).getWord();
+        StringBuilder output = new StringBuilder(currWord);
+        output.append(" ");
+        int countSize = 1;
+        while (countSize < numWords) {
+            String next;
+            //find the random next word in wordList
+            for (ListNode ln : wordList) {
+                if (ln.getWord().equals(currWord)) {
+                    next = ln.getRandomNextWord(rnGenerator);
+                    output.append(next);
+                    output.append(" ");
+                    countSize++;
+                    currWord = next;
+                }
+            }
+        }
+        return output.toString().trim();
     }
 
 
