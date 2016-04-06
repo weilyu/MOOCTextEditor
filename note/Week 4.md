@@ -1,33 +1,40 @@
-- **tree**
-    - terminology
-        - parent/child
-        - root has no parent node
-        - leaf has no children
-    - defines a tree
-        - single root
-        - each node only have one parent
-        - no cycles in a tree
-    - generic tree
-    - binary tree
-        - any parent can have at most two children
-        - construction
-            - have a linked structure
-            - each node needs
-                - a value
-                - a parent
-                - a left child
-                - a right child
-    - traversals
-        - pre-order traversals
-            - bottom line: order we visit matters and we'll make choice based on our needs
-        - post-order traversal
-        - level order traversal
-    - binary search tree
-        - construction
-            - binary tree
-            - left subtrees are less than parents
-            - right subtrees are greater than parents
-        - deletion
-            - if only one child, hoist child
-            - if two children, find smallest value in right subtree, 
-                hoist that value up, delete the right subtree duplicate
+## tree
+- terminology
+    - parent/child
+    - root has no parent node
+    - leaf has no children
+- defines a tree
+    - single root
+    - each node only have one parent
+    - no cycles in a tree
+- generic tree
+- binary tree
+    - any parent can have at most two children
+    - construction
+        - have a linked structure
+        - each node needs
+            - a value
+            - a parent
+            - a left child
+            - a right child
+- traversals
+    - pre-order traversals
+        - bottom line: order we visit matters and we'll make choice based on our needs
+    - post-order traversal
+    - level order traversal
+- binary search tree
+    - construction
+        - binary tree
+        - left subtrees are less than parents
+        - right subtrees are greater than parents
+    - deletion
+        - if only one child, hoist child
+        - if two children, find smallest value in right subtree, 
+            hoist that value up, delete the right subtree duplicate
+    - height: max distance until leaf, normally around log(n) for balanced BST
+    - balanced BST: leftHeight - rightHeight <= 1
+        - **TreeSet** built in Java API
+- trie
+    - name comes from the word reTRIEval
+    - differences
+        - nodes can have more than 2 children
