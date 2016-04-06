@@ -37,8 +37,7 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * as the number of TrieNodes in the trie.
      */
     public int size() {
-        //TODO: Implement this method
-        return 0;
+        return size;
     }
 
 
