@@ -9,7 +9,7 @@ public class DictionaryLL implements Dictionary {
 
     private LinkedList<String> dict;
 
-    public DictionaryLL(LinkedList<String> dict) {
+    public DictionaryLL() {
         this.dict = new LinkedList<>();
     }
 
@@ -22,7 +22,10 @@ public class DictionaryLL implements Dictionary {
      * (it wasn't already there).
      */
     public boolean addWord(String word) {
-        // TODO: Implement this method
+        if (!dict.contains(word.toLowerCase())) {
+            dict.add(word.toLowerCase());
+            return true;
+        }
         return false;
     }
 
