@@ -17,7 +17,17 @@
                 - a parent
                 - a left child
                 - a right child
-    - pre-order traversals
-        - bottom line: order we visit matters and we'll make choice based on our needs
-    - post-order traversal
-    - level order traversal
+    - traversals
+        - pre-order traversals
+            - bottom line: order we visit matters and we'll make choice based on our needs
+        - post-order traversal
+        - level order traversal
+    - binary search tree
+        - construction
+            - binary tree
+            - left subtrees are less than parents
+            - right subtrees are greater than parents
+        - deletion
+            - if only one child, hoist child
+            - if two children, find smallest value in right subtree, 
+                hoist that value up, delete the right subtree duplicate
