@@ -107,7 +107,18 @@ public class NearbyWords implements SpellingSuggest {
      * @return
      */
     public void deletions(String s, List<String> currentList, boolean wordsOnly) {
-        // TODO: Implement this method
+        for (int i = 0; i < s.length(); i++) {
+            StringBuilder sb = new StringBuilder(s);
+            sb.deleteCharAt(i);
+            String toAdd = sb.toString();
+            if (wordsOnly) {
+                if (dict.isWord(toAdd) && !currentList.contains(toAdd)) {
+                    currentList.add(toAdd);
+                }
+            } else {
+                if (!currentList.contains(toAdd)) currentList.add(toAdd);
+            }
+        }
     }
 
     /**
