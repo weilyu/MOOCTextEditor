@@ -57,7 +57,12 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
     @Override
     public boolean isWord(String s) {
         // TODO: Implement this method
-
+        String sLC = s.toLowerCase();
+        TrieNode curTrieNode = root;
+        for (char c : sLC.toCharArray()) {
+            if (curTrieNode.endsWord() && curTrieNode.getText().equals(sLC)) return true;
+            curTrieNode = curTrieNode.getChild(c);
+        }
         return false;
     }
 
