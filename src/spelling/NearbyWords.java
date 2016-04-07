@@ -33,7 +33,7 @@ public class NearbyWords implements SpellingSuggest {
      * @return list of Strings which are nearby the original string
      */
     public List<String> distanceOne(String s, boolean wordsOnly) {
-        List<String> retList = new ArrayList<String>();
+        List<String> retList = new ArrayList<>();
         insertions(s, retList, wordsOnly);
         subsitution(s, retList, wordsOnly);
         deletions(s, retList, wordsOnly);
@@ -56,7 +56,7 @@ public class NearbyWords implements SpellingSuggest {
             for (int charCode = (int) 'a'; charCode <= (int) 'z'; charCode++) {
                 // use StringBuffer for an easy interface to permuting the
                 // letters in the String
-                StringBuffer sb = new StringBuffer(s);
+                StringBuilder sb = new StringBuilder(s);
                 sb.setCharAt(index, (char) charCode);
 
                 // if the item isn't in the list, isn't the original string, and
@@ -133,10 +133,10 @@ public class NearbyWords implements SpellingSuggest {
     public List<String> suggestions(String word, int numSuggestions) {
 
         // initial variables
-        List<String> queue = new LinkedList<String>();     // String to explore
-        HashSet<String> visited = new HashSet<String>();   // to avoid exploring the same
+        List<String> queue = new LinkedList<>();     // String to explore
+        HashSet<String> visited = new HashSet<>();   // to avoid exploring the same
         // string multiple times
-        List<String> retList = new LinkedList<String>();   // words to return
+        List<String> retList = new LinkedList<>();   // words to return
 
 
         // insert first node
@@ -147,15 +147,13 @@ public class NearbyWords implements SpellingSuggest {
             String wordFirst = queue.get(0);
             queue.remove(0);
             List<String> disOneWords = distanceOne(wordFirst, false);
-            for (String toAdd : disOneWords) {
-                if (!visited.contains(toAdd)) {
-                    visited.add(toAdd);
-                    queue.add(toAdd);
-                    if (dict.isWord(toAdd)) {
-                        retList.add(toAdd);
-                    }
+            disOneWords.stream().filter(toAdd -> !visited.contains(toAdd)).forEach(toAdd -> {
+                visited.add(toAdd);
+                queue.add(toAdd);
+                if (dict.isWord(toAdd)) {
+                    retList.add(toAdd);
                 }
-            }
+            });
         }
 
         return retList;
