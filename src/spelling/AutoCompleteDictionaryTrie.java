@@ -1,6 +1,7 @@
 package spelling;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
@@ -80,10 +81,9 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
             for (char c : prefixLC.toCharArray()) {
                 if (curTrieNode.getValidNextCharacters().contains(c)) {
                     curTrieNode = curTrieNode.getChild(c);
-                } else return new ArrayList<String>();
+                } else return new ArrayList<>();
             }
         }
-        printNode(curTrieNode);
 
         LinkedList<TrieNode> queue = new LinkedList<>();
         queue.add(curTrieNode);
@@ -92,33 +92,35 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
             TrieNode firstNode = queue.get(0);
             queue.remove(0);
             if (firstNode.endsWord()) completions.add(firstNode.getText());
-            for (char c : firstNode.getValidNextCharacters()) {
-                queue.add(firstNode.getChild(c));
-            }
+            queue.addAll(firstNode.getValidNextCharacters().stream().map(firstNode::getChild).collect(Collectors.toList()));
         }
         return completions;
     }
 
-    // For debugging
-    public void printTree() {
-        printNode(root);
-    }
+// --Commented out by Inspection START (4/7/2016 12:06 PM):
+//    // For debugging
+//    public void printTree() {
+//        printNode(root);
+//    }
+// --Commented out by Inspection STOP (4/7/2016 12:06 PM)
 
-    /**
-     * Do a pre-order traversal from this node down
-     */
-    public void printNode(TrieNode curr) {
-        if (curr == null)
-            return;
-
-        System.out.println(curr.getText());
-
-        TrieNode next = null;
-        for (Character c : curr.getValidNextCharacters()) {
-            next = curr.getChild(c);
-            printNode(next);
-        }
-    }
+// --Commented out by Inspection START (4/7/2016 12:07 PM):
+//    /**
+//     * Do a pre-order traversal from this node down
+//     */
+//    public void printNode(TrieNode curr) {
+//        if (curr == null)
+//            return;
+//
+//        System.out.println(curr.getText());
+//
+//        TrieNode next;
+//        for (Character c : curr.getValidNextCharacters()) {
+//            next = curr.getChild(c);
+//            printNode(next);
+//        }
+//    }
+// --Commented out by Inspection STOP (4/7/2016 12:07 PM)
 
 
 }
