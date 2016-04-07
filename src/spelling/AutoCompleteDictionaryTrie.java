@@ -28,7 +28,6 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * That is, you should convert the string to all lower case as you insert it.
      */
     public boolean addWord(String word) {
-        //TODO: Implement this method.
         String wordLC = word.toLowerCase();
         TrieNode curTrieNode = root;
         for (int i = 0; i < wordLC.length(); i++) {
@@ -56,12 +55,13 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      */
     @Override
     public boolean isWord(String s) {
-        // TODO: Implement this method
         String sLC = s.toLowerCase();
         TrieNode curTrieNode = root;
         for (char c : sLC.toCharArray()) {
+            if (curTrieNode.getValidNextCharacters().contains(c)) {
+                curTrieNode = curTrieNode.getChild(c);
+            }
             if (curTrieNode.endsWord() && curTrieNode.getText().equals(sLC)) return true;
-            curTrieNode = curTrieNode.getChild(c);
         }
         return false;
     }
@@ -70,9 +70,10 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * * Returns up to the n "best" predictions, including the word itself,
      * in terms of length
      * If this string is not in the trie, it returns null.
-     *
+     * <p>
      * text The text to use at the word stem
      * n    The maximum number of predictions desired.
+     *
      * @return A list containing the up to n best predictions
      */
     @Override
