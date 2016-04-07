@@ -29,7 +29,17 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      */
     public boolean addWord(String word) {
         //TODO: Implement this method.
-        return false;
+        String wordLC = word.toLowerCase();
+        TrieNode curTrieNode = root;
+        for (int i = 0; i < wordLC.length(); i++) {
+            char curChar = wordLC.charAt(i);
+            if (curTrieNode.endsWord() && curTrieNode.getText().equals(wordLC)) return false;
+            curTrieNode.insert(curChar);
+            curTrieNode = curTrieNode.getChild(curChar);
+            if (i == wordLC.length() - 1) curTrieNode.setEndsWord(true);
+        }
+        size++;
+        return true;
     }
 
     /**
@@ -47,6 +57,7 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
     @Override
     public boolean isWord(String s) {
         // TODO: Implement this method
+
         return false;
     }
 
@@ -55,8 +66,8 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      * in terms of length
      * If this string is not in the trie, it returns null.
      *
-     * @param text The text to use at the word stem
-     * @param n    The maximum number of predictions desired.
+     * text The text to use at the word stem
+     * n    The maximum number of predictions desired.
      * @return A list containing the up to n best predictions
      */
     @Override
