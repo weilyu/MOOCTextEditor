@@ -1,10 +1,6 @@
 package spelling;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * An trie data structure that implements the Dictionary and the AutoComplete ADT
@@ -79,19 +75,38 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
     @Override
     public List<String> predictCompletions(String prefix, int numCompletions) {
         // TODO: Implement this method
+        String prefixLC = prefix.toLowerCase();
         // This method should implement the following algorithm:
         // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
         //    empty list
+        TrieNode curTrieNode = root;
+        for (char c : prefixLC.toCharArray()) {
+            if (curTrieNode.getValidNextCharacters().contains(c)) {
+                curTrieNode = curTrieNode.getChild(c);
+            } else return null;
+        }
         // 2. Once the stem is found, perform a breadth first search to generate completions
         //    using the following algorithm:
         //    Create a queue (LinkedList) and add the node that completes the stem to the back
         //       of the list.
+        LinkedList<TrieNode> queue = new LinkedList<>();
+        queue.add(curTrieNode);
         //    Create a list of completions to return (initially empty)
+        List<String> completions = new ArrayList<>();
         //    While the queue is not empty and you don't have enough completions:
-        //       remove the first Node from the queue
-        //       If it is a word, add it to the completions list
-        //       Add all of its child nodes to the back of the queue
-        // Return the list of completions
+        while (queue.size() > 0) {
+            //       remove the first Node from the queue
+            TrieNode firstNode = queue.get(0);
+            queue.remove(0);
+            //       If it is a word, add it to the completions list
+            if (firstNode.endsWord()) completions.add(firstNode.getText());
+            //       Add all of its child nodes to the back of the queue
+            for (char c : firstNode.getValidNextCharacters()) {
+                queue.add(firstNode.getChild(c));
+            }
+            // Return the list of completions
+            return completions;
+        }
 
         return null;
     }
