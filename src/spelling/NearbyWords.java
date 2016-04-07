@@ -80,7 +80,21 @@ public class NearbyWords implements SpellingSuggest {
      * @return
      */
     public void insertions(String s, List<String> currentList, boolean wordsOnly) {
-        // TODO: Implement this method
+        String alph = "abcdefghijklmnopqrstuvwxyz";
+        for (int i = 0; i < s.length() + 1; i++) {
+            for (char c : alph.toCharArray()) {
+                StringBuilder sb = new StringBuilder(s);
+                sb.insert(i, c);
+                String toAdd = sb.toString();
+                if (wordsOnly) {
+                    if (dict.isWord(toAdd) && !currentList.contains(toAdd)) {
+                        currentList.add(toAdd);
+                    }
+                } else {
+                    if (!currentList.contains(toAdd)) currentList.add(toAdd);
+                }
+            }
+        }
     }
 
     /**
@@ -126,7 +140,7 @@ public class NearbyWords implements SpellingSuggest {
 
     public static void main(String[] args) {
        /* basic testing code to get started
-	   String word = "i";
+       String word = "i";
 	   // Pass NearbyWords any Dictionary implementation you prefer
 	   Dictionary d = new DictionaryHashSet();
 	   DictionaryLoader.loadDictionary(d, "data/dict.txt");
