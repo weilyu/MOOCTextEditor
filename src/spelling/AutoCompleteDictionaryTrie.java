@@ -74,41 +74,29 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      */
     @Override
     public List<String> predictCompletions(String prefix, int numCompletions) {
-        // TODO: Implement this method
         String prefixLC = prefix.toLowerCase();
-        // This method should implement the following algorithm:
-        // 1. Find the stem in the trie.  If the stem does not appear in the trie, return an
-        //    empty list
         TrieNode curTrieNode = root;
-        for (char c : prefixLC.toCharArray()) {
-            if (curTrieNode.getValidNextCharacters().contains(c)) {
-                curTrieNode = curTrieNode.getChild(c);
-            } else return null;
+        if (prefix.length() > 0) {
+            for (char c : prefixLC.toCharArray()) {
+                if (curTrieNode.getValidNextCharacters().contains(c)) {
+                    curTrieNode = curTrieNode.getChild(c);
+                } else return new ArrayList<String>();
+            }
         }
-        // 2. Once the stem is found, perform a breadth first search to generate completions
-        //    using the following algorithm:
-        //    Create a queue (LinkedList) and add the node that completes the stem to the back
-        //       of the list.
+        printNode(curTrieNode);
+
         LinkedList<TrieNode> queue = new LinkedList<>();
         queue.add(curTrieNode);
-        //    Create a list of completions to return (initially empty)
         List<String> completions = new ArrayList<>();
-        //    While the queue is not empty and you don't have enough completions:
-        while (queue.size() > 0) {
-            //       remove the first Node from the queue
+        while (queue.size() > 0 && completions.size() < numCompletions) {
             TrieNode firstNode = queue.get(0);
             queue.remove(0);
-            //       If it is a word, add it to the completions list
             if (firstNode.endsWord()) completions.add(firstNode.getText());
-            //       Add all of its child nodes to the back of the queue
             for (char c : firstNode.getValidNextCharacters()) {
                 queue.add(firstNode.getChild(c));
             }
-            // Return the list of completions
-            return completions;
         }
-
-        return null;
+        return completions;
     }
 
     // For debugging
