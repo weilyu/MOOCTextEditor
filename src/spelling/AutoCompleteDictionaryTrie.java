@@ -29,10 +29,10 @@ public class AutoCompleteDictionaryTrie implements Dictionary, AutoComplete {
      */
     public boolean addWord(String word) {
         String wordLC = word.toLowerCase();
+        if (isWord(wordLC)) return false;
         TrieNode curTrieNode = root;
         for (int i = 0; i < wordLC.length(); i++) {
             char curChar = wordLC.charAt(i);
-            if (curTrieNode.endsWord() && curTrieNode.getText().equals(wordLC)) return false;
             curTrieNode.insert(curChar);
             curTrieNode = curTrieNode.getChild(curChar);
             if (i == wordLC.length() - 1) curTrieNode.setEndsWord(true);
