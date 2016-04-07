@@ -143,7 +143,20 @@ public class NearbyWords implements SpellingSuggest {
         queue.add(word);
         visited.add(word);
 
-        // TODO: Implement the remainder of this method, see assignment for algorithm
+        while (queue.size() > 0 && retList.size() < numSuggestions) {
+            String wordFirst = queue.get(0);
+            queue.remove(0);
+            List<String> disOneWords = distanceOne(wordFirst, false);
+            for (String toAdd : disOneWords) {
+                if (!visited.contains(toAdd)) {
+                    visited.add(toAdd);
+                    queue.add(toAdd);
+                    if (dict.isWord(toAdd)) {
+                        retList.add(toAdd);
+                    }
+                }
+            }
+        }
 
         return retList;
 
